@@ -1,17 +1,21 @@
 public class Main {
     public static void main(String[] args) {
-        Guerreiro guerreiro1 = new Guerreiro("Fulano", 100, 20, 10);
-        Guerreiro guerreiro2 = new Guerreiro("Ciclano", 90, 18, 8);
+        Guerreiro guerreiro = new Guerreiro("Arthur", 120, 20, 8);
+        Mago mago = new Mago("Merlin", 80, 18, 5, 30);
 
-        guerreiro1.exibirStatus();
+        System.out.println("=== STATUS INICIAL ===");
+        guerreiro.exibirStatus();
         System.out.println();
+        mago.exibirStatus();
 
-        guerreiro1.atacar(guerreiro2);
-        guerreiro2.usarHabilidadeEspecial(guerreiro1);
+        System.out.println("\n=== BATALHA ===");
+        guerreiro.atacar(mago);
+        mago.usarHabilidadeEspecial(guerreiro);
+        guerreiro.usarHabilidadeEspecial(mago);
 
+        System.out.println("\n=== STATUS FINAL ===");
+        guerreiro.exibirStatus();
         System.out.println();
-        guerreiro1.exibirStatus();
-        System.out.println();
-        guerreiro2.exibirStatus();
+        mago.exibirStatus();
     }
 }
