@@ -1,0 +1,26 @@
+name: GitHub Actions - CD
+run-name: "${{ github.actor }} merged into main 🚀"
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+permissions:
+  contents: read
+
+jobs:
+  zip-src:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+
+      - name: Disponibiliza Zip Atualizado
+        uses: actions/upload-artifact@v7
+        with:
+          name: src-${{ github.event.pull_request.merge_commit_sha }}
+          path: src/
+          if-no-files-found: error
+          retention-days: 7
