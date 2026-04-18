@@ -24,3 +24,15 @@ jobs:
           path: src/
           if-no-files-found: error
           retention-days: 7
+
+  download-artifact:
+    if: github.event.pull_request.merged == true
+    needs: zip-src
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o zip-src gerado
+        uses: actions/download-artifact@v8
+        with:
+          name: src-zip
+          path: downloaded-artifact
