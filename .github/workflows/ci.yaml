@@ -14,3 +14,15 @@ jobs:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '25'
       - run: java src/Main.java
+
+  download-artifact:
+    if: github.event.pull_request.merged == true
+    needs: zip-src
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o zip-src gerado
+        uses: actions/download-artifact@v8
+        with:
+          name: src-zip
+          path: downloaded-artifact
