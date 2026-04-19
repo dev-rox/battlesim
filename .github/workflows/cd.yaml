@@ -31,8 +31,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar o zip-src geradoo
+      - name: Baixar o zip-src gerado
         uses: actions/download-artifact@v8
         with:
           name: src-${{ github.event.pull_request.merge_commit_sha }}
           path: downloaded-artifact
+
+  docker-run:
+
+    needs: download-artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+
+      - name: Baixar artifact novamente
+        uses: actions/download-artifact@v8
+        with:
+          name: src-${{ github.event.pull_request.merge_commit_sha }}
+          path: downloaded-artifact
+
+      - name: Substituir src pela versão do artifact
+        run: |
+          rm -rf src
+          cp -r downloaded-artifact src
+
+      - name: Mostrar estrutura final
+        run: ls -R
+
+      - name: Build da imagem Docker
+        run: docker build -t batalha-java .
+
+      - name: Rodar container Docker
+        run: docker run --rm batalha-java
