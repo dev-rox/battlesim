@@ -34,5 +34,5 @@ jobs:
       - name: Baixar o zip-src gerado
         uses: actions/download-artifact@v8
         with:
-          name: src-zip
+          name: src-${{ github.event.pull_request.merge_commit_sha }}
           path: downloaded-artifact
