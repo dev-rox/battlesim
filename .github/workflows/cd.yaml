@@ -31,8 +31,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar o zip-src gerado
+      - name: Baixar o zip-src geradoo
         uses: actions/download-artifact@v8
         with:
-          name: src-zip
+          name: src-${{ github.event.pull_request.merge_commit_sha }}
           path: downloaded-artifact
