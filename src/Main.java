@@ -17,5 +17,11 @@ public class Main {
         guerreiro.exibirStatus();
         System.out.println();
         mago.exibirStatus();
+
+        try {
+            Thread.sleep(50000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
