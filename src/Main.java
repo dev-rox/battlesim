@@ -19,7 +19,7 @@ public class Main {
         mago.exibirStatus();
 
         try {
-            Thread.sleep(50000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
