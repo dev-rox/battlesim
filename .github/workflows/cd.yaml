@@ -65,3 +65,14 @@ jobs:
 
       - name: Rodar container Docker
         run: docker run --rm batalha-java
+
+  discord:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Notify Discord
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
